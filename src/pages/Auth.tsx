@@ -1,15 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Baby } from "lucide-react";
+import { Baby, LogIn } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from 'react-router-dom';
+import { useAuth } from "@/contexts/AuthContext";
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,9 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
+  const { signInWithGoogle } = useAuth();
 
   useEffect(() => {
     // Check if user is already logged in
@@ -29,6 +32,13 @@ const Auth = () => {
       }
     };
     checkUser();
+
+    // Set active tab based on URL parameter
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab === 'register') {
+      setActiveTab('register');
+    }
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -42,7 +52,7 @@ const Auth = () => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [navigate]);
+  }, [navigate, location.search]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,6 +166,17 @@ const Auth = () => {
                       required 
                     />
                   </div>
+                  <div className="pt-2">
+                    <Button 
+                      type="button" 
+                      onClick={signInWithGoogle}
+                      variant="outline"
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" x2="12" y1="8" y2="8"></line><line x1="3.95" x2="8.54" y1="6.06" y2="14"></line><line x1="10.88" x2="15.46" y1="21.94" y2="14"></line></svg>
+                      Sign in with Google
+                    </Button>
+                  </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
                   <Button type="button" variant="outline" onClick={() => navigate('/')}>
@@ -207,6 +228,17 @@ const Auth = () => {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required 
                     />
+                  </div>
+                  <div className="pt-2">
+                    <Button 
+                      type="button" 
+                      onClick={signInWithGoogle}
+                      variant="outline"
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" x2="12" y1="8" y2="8"></line><line x1="3.95" x2="8.54" y1="6.06" y2="14"></line><line x1="10.88" x2="15.46" y1="21.94" y2="14"></line></svg>
+                      Sign up with Google
+                    </Button>
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">

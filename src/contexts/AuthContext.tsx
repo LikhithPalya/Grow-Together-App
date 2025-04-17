@@ -8,6 +8,7 @@ type AuthContextType = {
   session: Session | null;
   user: User | null;
   signOut: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   loading: boolean;
 };
 
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType>({
   session: null,
   user: null,
   signOut: async () => {},
+  signInWithGoogle: async () => {},
   loading: true,
 });
 
@@ -62,10 +64,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+        }
+      });
+
+      if (error) throw error;
+      
+      toast({
+        title: 'Google authentication initiated',
+        description: 'Please complete the authentication process',
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Error signing in with Google',
+        description: error.message,
+        variant: 'destructive',
+      });
+    }
+  };
+
   const value = {
     session,
     user,
     signOut,
+    signInWithGoogle,
     loading,
   };
 

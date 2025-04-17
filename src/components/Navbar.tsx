@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
-import { Menu, X, Baby, User } from "lucide-react";
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, Baby, User, LogOut } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -11,9 +11,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useAuth } from '@/contexts/AuthContext';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -21,6 +31,16 @@ const Navbar = () => {
     { name: 'Tools', path: '/tools' },
     { name: 'Community', path: '/community' },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
+  const goToAuth = (tab: string = 'login') => {
+    navigate(`/auth?tab=${tab}`);
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="bg-white py-4 px-6 shadow-sm sticky top-0 z-50">
@@ -44,10 +64,42 @@ const Navbar = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-parent-blue text-parent-blue hover:bg-parent-blue hover:text-white">
-            Sign In
-          </Button>
-          <Button className="bg-parent-blue hover:bg-parent-blue/90">Sign Up</Button>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="border-parent-blue text-parent-blue hover:bg-parent-blue hover:text-white">
+                  <User className="h-4 w-4 mr-2" />
+                  Account
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem className="text-gray-500">
+                  {user.email}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="text-red-500 cursor-pointer">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <>
+              <Button 
+                variant="outline" 
+                className="border-parent-blue text-parent-blue hover:bg-parent-blue hover:text-white"
+                onClick={() => navigate('/auth')}
+              >
+                Sign In
+              </Button>
+              <Button 
+                className="bg-parent-blue hover:bg-parent-blue/90"
+                onClick={() => navigate('/auth?tab=register')}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </div>
         
         {/* Mobile Navigation - Sheet Component */}
@@ -81,10 +133,35 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" className="border-parent-blue text-parent-blue hover:bg-parent-blue hover:text-white">
-                  Sign In
-                </Button>
-                <Button className="bg-parent-blue hover:bg-parent-blue/90">Sign Up</Button>
+                {user ? (
+                  <>
+                    <div className="text-sm text-gray-500 mb-2">{user.email}</div>
+                    <Button 
+                      variant="outline" 
+                      className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      className="border-parent-blue text-parent-blue hover:bg-parent-blue hover:text-white"
+                      onClick={() => goToAuth('login')}
+                    >
+                      Sign In
+                    </Button>
+                    <Button 
+                      className="bg-parent-blue hover:bg-parent-blue/90"
+                      onClick={() => goToAuth('register')}
+                    >
+                      Sign Up
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </SheetContent>

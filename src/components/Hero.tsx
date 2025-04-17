@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Baby, ArrowRight, Calendar, BookOpen, Heart } from 'lucide-react';
 
 const Hero = () => {
+  const handleGetStarted = () => {
+    const featuresSection = document.getElementById('features-section');
+    featuresSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="hero-gradient py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -16,7 +21,11 @@ const Hero = () => {
               Resources, tools, and community support tailored to your child's unique developmental journey.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button size="lg" className="bg-white text-parent-blue hover:bg-white/90">
+              <Button 
+                size="lg" 
+                className="bg-white text-parent-blue hover:bg-white/90"
+                onClick={handleGetStarted}
+              >
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20">

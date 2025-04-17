@@ -16,7 +16,11 @@ const CTASection = () => {
           <Button size="lg" className="bg-white text-parent-blue hover:bg-white/90">
             Create Free Account
           </Button>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="border-white text-secondary-foreground hover:bg-white/10"
+          >
             Explore Resources
           </Button>
         </div>

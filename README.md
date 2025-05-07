@@ -1,73 +1,83 @@
-# Welcome to your Lovable project
+# 🌿 Mindful Parent Guide | A Compassionate Parenting Companion
 
-## Project info
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20App-green)](https://mindful-parent-guide.lovable.app/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/your-username/mindful-parent-guide/pulls)
 
-**URL**: https://lovable.dev/projects/39418312-b21b-4971-8650-3d13e55a7dd0
+A **web-based guide** designed to help parents practice mindfulness, strengthen emotional bonds with their children, and navigate parenting challenges with evidence-based strategies.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 📌 Table of Contents
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Acknowledgements](#-acknowledgements)
+- [Contact](#-contact)
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/39418312-b21b-4971-8650-3d13e55a7dd0) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+### Core Functionalities
+✅ **Guided Mindfulness Exercises**  
+   - Short meditations for busy parents.  
+   - Daily reflection prompts.  
 
-**Use your preferred IDE**
+✅ **Age-Specific Parenting Tips**  
+   - Curated advice for toddlers, teens, etc.  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+✅ **Interactive Tools**  
+   - Mood trackers, journaling templates, and progress analytics.  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+✅ **Community Support** *(if applicable)*  
+   - Parent forums or peer-sharing features.  
 
-Follow these steps:
+### Bonus
+- Dark/Light mode toggle.  
+- Multilingual support (if applicable).  
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🖼️ Screenshots
 
-# Step 3: Install the necessary dependencies.
-npm i
+*(Replace with actual screenshots or GIFs)*  
+| Feature 1 | Feature 2 |
+|-----------|-----------|
+| ![Screenshot 1](https://via.placeholder.com/400x200) | ![Screenshot 2](https://via.placeholder.com/400x200) |
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## 🛠️ Tech Stack
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Frontend
+- **Framework**: [React.js](https://reactjs.org/) / [Next.js](https://nextjs.org/)  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) / [Sass](https://sass-lang.com/)  
+- **State Management**: [Redux](https://redux.js.org/) / [Context API](https://reactjs.org/docs/context.html)  
 
-**Use GitHub Codespaces**
+### Backend *(if applicable)*
+- **API**: [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/)  
+- **Database**: [Firebase](https://firebase.google.com/) / [MongoDB](https://www.mongodb.com/)  
+- **Authentication**: [Auth0](https://auth0.com/) / [Firebase Auth](https://firebase.google.com/docs/auth)  
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### DevOps
+- **Hosting**: [Vercel](https://vercel.com/) / [Netlify](https://www.netlify.com/)  
+- **CI/CD**: GitHub Actions  
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## ⚙️ Installation
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Prerequisites
+- Node.js ≥ v16
+- npm/yarn
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/39418312-b21b-4971-8650-3d13e55a7dd0) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Steps
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-username/mindful-parent-guide.git
+   cd mindful-parent-guide
